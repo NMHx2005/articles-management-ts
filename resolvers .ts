@@ -1,7 +1,14 @@
+import Article from "./models/acticel.model";
+
 export const resolvers = {
-    Query: {
-      hello: () => {
-        return "Hello World!";
-      }
+  Query: {
+    getListArticle: async () => {
+      const articles = await Article.find({ 
+        deleted: false 
+      });
+
+
+      return articles;
     }
-  };
+  }
+};
