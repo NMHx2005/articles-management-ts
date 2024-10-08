@@ -43,6 +43,21 @@ export const resolvers = {
         code: 200,
         message: "Xóa thành công"
       };
+    },
+    updateArticle: async (_, args) => {
+      const { id, article } = args;
+
+      await Article.updateOne({
+        _id: id,
+        deleted: false
+      }, article)
+
+      const record = await Article.findOne({
+        _id: id,
+        deleted: false
+      })
+
+      return record;
     }
   }
 };
