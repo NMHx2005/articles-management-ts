@@ -8,9 +8,18 @@ export const typeDefs = gql`
         avatar: String
         description: String
     }
+
+    type Category {
+        id: String
+        title: String
+        avatar: String
+    }
     type Query {
         getListArticle: [Article],
-        getArticle(id: String): Article
+        getArticle(id: String): Article,
+
+        getListCategory: [Category],
+        getCategory(id: String): Category
     }
     type message {
         code: Int,
@@ -21,9 +30,18 @@ export const typeDefs = gql`
         avatar: String
         description: String
     }
+
+    input CategoryInput {
+        title: String,
+        avatar: String
+    }
     type Mutation {
         createArticle(article: ArticleInput): Article
         deleteArticle(id: ArticleInput): message
         updateArticle(id: String, article: ArticleInput): Article
+
+        createCategory(category: CategoryInput): Category
+        deleteCategory(id: String): message
+        updateCategory(id: String, category: CategoryInput): Category
     }
 `;
