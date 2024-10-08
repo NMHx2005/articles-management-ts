@@ -29,6 +29,20 @@ export const resolvers = {
       await record.save();
 
       return record;
+    },
+    deleteArticle: async (_, args) => {
+      const { id } = args;
+
+      await Article.updateOne({
+        _id: id
+      }, {
+        deleted: true
+      })
+
+      return {
+        code: 200,
+        message: "Xóa thành công"
+      };
     }
   }
 };
