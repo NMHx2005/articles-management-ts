@@ -4,7 +4,7 @@ import Article from "../models/acticel.model";
 export const resolversArticle = {
   Query: {
     getListArticle: async (_, args) => {
-        const { sortKey, sortValue } = args;
+        const { sortKey, sortValue, limitItems = 2, page = 1 } = args;
 
         // Sắp xếp
         const sort = {};
@@ -14,10 +14,17 @@ export const resolversArticle = {
         }
         // Hết sắp xếp
 
+        // Phân trang
+        const skip: number = (page - 1) * limitItems;
+        // Hết phân trang
+
+
         const articles = await Article
             .find({ 
                 deleted: false 
             })
+            .limit(limitItems)
+            .skip(skip)
             .sort(sort);
 
 
