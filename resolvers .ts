@@ -37,7 +37,17 @@ export const resolvers = {
       });
       return category;
     }
+  },
+  Article: {
+    category: async (article) => {
+      const record = await Article.findOne({
+        _id: article.categoryId,
+        deleted: false
+      });
 
+
+      return record;
+    }
   },
   Mutation: {
     createArticle: async (_, args) => {
