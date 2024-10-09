@@ -3,13 +3,25 @@ import Article from "../models/acticel.model";
 
 export const resolversArticle = {
   Query: {
-    getListArticle: async () => {
-      const articles = await Article.find({ 
-        deleted: false 
-      });
+    getListArticle: async (_, args) => {
+        const { sortKey, sortValue } = args;
+
+        // Sắp xếp
+        const sort = {};
+
+        if (sortKey && sortValue) {
+            sort[sortKey] = sortValue;
+        }
+        // Hết sắp xếp
+
+        const articles = await Article
+            .find({ 
+                deleted: false 
+            })
+            .sort(sort);
 
 
-      return articles;
+        return articles;
     },
     getArticle: async (_, args) => {
       const { id } = args;
