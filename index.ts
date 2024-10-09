@@ -5,8 +5,8 @@ import { ApolloServer } from "apollo-server-express";
 
 dotenv.config();
 
-import { typeDefs } from "./typedefs";
-import { resolvers } from "./resolvers ";
+import { typeDefs } from "./typeDefs/index.typeDefs";
+import { resolvers } from "./resolvers/index.resolvers";
 
 
 const startServer = async () => {
