@@ -4,7 +4,23 @@ import Article from "../models/acticel.model";
 export const resolversArticle = {
   Query: {
     getListArticle: async (_, args) => {
-        const { sortKey, sortValue, limitItems = 2, page = 1 } = args;
+        const { 
+            sortKey, 
+            sortValue, 
+            limitItems = 2, 
+            page = 1,
+            filterKey,
+            filterValue
+        } = args;
+
+        // Bộ lọc
+        const find = {
+            deleted: false
+        }
+        if(filterKey && filterValue) {
+            find[filterKey] = filterValue;
+        }
+        // Hết bộ lọc
 
         // Sắp xếp
         const sort = {};
@@ -20,9 +36,7 @@ export const resolversArticle = {
 
 
         const articles = await Article
-            .find({ 
-                deleted: false 
-            })
+            .find(find)
             .limit(limitItems)
             .skip(skip)
             .sort(sort);
