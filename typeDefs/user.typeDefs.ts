@@ -2,7 +2,7 @@ import { gql } from "apollo-server-express";
 
 export const typeDefsUser = gql`
   type Query {
-    getUser(id: String): User
+    getUser(token: String): User
   }
   type User {
     id: String,
